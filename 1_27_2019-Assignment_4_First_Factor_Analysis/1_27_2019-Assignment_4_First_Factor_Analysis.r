@@ -1,6 +1,6 @@
 
 
-DATA <- read.csv("Assignment_4_Data.csv", header=TRUE, na.strings="-999")
+DATA <- read.csv("Assignment_4_Data.csv", header=TRUE, na.strings="-999", nrows = 100)
 colnames(DATA)[1] <- "Age"
 
 library(psych)
@@ -10,15 +10,16 @@ library(psych)
 # Checking for reverse-scored items using a reliability test
 alpha(DATA)
 
-DATA_RC <- reverse.code(c(1,1,1,1,1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), DATA)
+#DATA_RC <- reverse.code(c(1,1,1,1,1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+#                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), DATA)
 
-DATA_RC <- as.data.frame(DATA_RC)
+#DATA_RC <- as.data.frame(DATA_RC)
 
-View(DATA_RC)
+
+DATA_RC <- DATA
 
 #Splitting off JP items, running factor analysis on them
-JP <- DATA_RC[c("JP1-", "JP2-", "JP3-")]
+JP <- DATA_RC[c("JP1", "JP2", "JP3")]
 alpha(JP)
 
 #Splitting off CPC items, calculating chronbach's alpha
