@@ -14,9 +14,13 @@ FA
 
 kaiser(FA)
 
-scree(DATA)
+SCREE <- scree(DATA)
+SCREE
 
-fa.parallel(DATA)
+PA <- fa.parallel(DATA)
+PA
+
+
 
 # Hypothesized number of factors based on dataset labels is 6.
 # VSS function documentation suggests applying "more than hypothesized," so using function default of 8.
