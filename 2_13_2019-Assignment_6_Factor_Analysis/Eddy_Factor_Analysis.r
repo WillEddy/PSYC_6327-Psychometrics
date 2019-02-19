@@ -26,6 +26,14 @@ PA
 # VSS function documentation suggests applying "more than hypothesized," so using function default of 8.
 # Default rotation - varimax
 
-VSS(DATA)
+VSS(DATA, n=4)
 
+VSS(DATA, rotate="oblimin")
 
+DATA <- DATA[complete.cases(DATA),]
+
+fa(DATA)
+COR_DATA <- cor(DATA)
+FA_DATA <- fa(COR_DATA, rotate="varimax", oblique.scores=TRUE, covar=TRUE, residuals=TRUE)
+
+fa.sort(FA_DATA)
