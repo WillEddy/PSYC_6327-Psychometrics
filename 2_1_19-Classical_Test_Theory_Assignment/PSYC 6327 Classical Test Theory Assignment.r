@@ -1,4 +1,4 @@
-DATA <- read_sav("2_1_19-Classical_Test_Theory_Assignment/PSYC 6327 Classical Test Theory Assignment Data.sav")
+DATA <- read_sav("PSYC 6327 Classical Test Theory Assignment Data.sav")
 
 library(psych)
 
