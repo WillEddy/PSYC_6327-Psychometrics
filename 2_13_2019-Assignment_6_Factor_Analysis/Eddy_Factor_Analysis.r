@@ -34,6 +34,8 @@ DATA <- DATA[complete.cases(DATA),]
 
 fa(DATA)
 COR_DATA <- cor(DATA)
-FA_DATA <- fa(COR_DATA, rotate="varimax", oblique.scores=TRUE, covar=TRUE, residuals=TRUE)
+FA_DATA <- fa(COR_DATA, nfactors=3, rotate="oblimin", oblique.scores=TRUE, covar=TRUE, residuals=TRUE)
 
 fa.sort(FA_DATA)
+
+FA_DATA
