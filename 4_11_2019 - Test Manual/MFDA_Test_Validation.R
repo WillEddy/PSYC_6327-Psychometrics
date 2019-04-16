@@ -4,17 +4,12 @@ library(haven)
 library(psych)
 library(GPArotation)
 library(readr)
-DATA_ALL <- read_csv("Data/numeric_abridged.csv", 
+DATA_ALL <- read_csv("Data/EDDY_TestManualData_numeric_abridged.csv", 
                  na = "NA")
 
-
-
-
 DATA <- DATA_ALL[,1:28]
-colnames(DATA) <- c("1","2","3","4","5","6","7","8","9","10"
-                    ,"11","12","13","14","15","16","17","18","19","20","21"
-                    ,"22","23","24","25","26","27","28"
-                    )
+
+View(DATA)
 
 # Identifying Reverse Scored Items - look for negative loadings
 DATA <- DATA[complete.cases(DATA),]
@@ -22,95 +17,56 @@ COR_DATA <- cor(DATA)
 Rev_Score_Ident <- fa(COR_DATA, nfactors=1, rotate="oblimin")
 fa.sort(Rev_Score_Ident)
 
-View(DATA_ALL)
-
-#Items intended to be reverse scored: 7, 10, 14, 17, 18, 20, 21, 22, 24, 
-
 # Recoding data for reverse scored items
-DATA$"19"[DATA$"19"=="1"] <- "5_rev"
-DATA$"19"[DATA$"19"=="2"] <- "4_rev"
-DATA$"19"[DATA$"19"=="4"] <- "2"
-DATA$"19"[DATA$"19"=="5"] <- "1"
-DATA$"19"[DATA$"19"=="6"] <- "NA"
-DATA$"19"[DATA$"19"=="7"] <- "NA"
-DATA$"19"[DATA$"19"=="5_rev"] <- "5"
-DATA$"19"[DATA$"19"=="4_rev"] <- "4"
-DATA$"19" <- as.numeric(DATA$"19")
+DATA$"DA1"[DATA$"DA1"=="1"] <- "5_rev"
+DATA$"DA1"[DATA$"DA1"=="2"] <- "4_rev"
+DATA$"DA1"[DATA$"DA1"=="4"] <- "2"
+DATA$"DA1"[DATA$"DA1"=="5"] <- "1"
+DATA$"DA1"[DATA$"DA1"=="5_rev"] <- "5"
+DATA$"DA1"[DATA$"DA1"=="4_rev"] <- "4"
+DATA$"DA1" <- as.numeric(DATA$"DA1")
 
-DATA$"26"[DATA$"26"=="1"] <- "5_rev"
-DATA$"26"[DATA$"26"=="2"] <- "4_rev"
-DATA$"26"[DATA$"26"=="4"] <- "2"
-DATA$"26"[DATA$"26"=="5"] <- "1"
-DATA$"26"[DATA$"26"=="6"] <- "NA"
-DATA$"26"[DATA$"26"=="7"] <- "NA"
-DATA$"26"[DATA$"26"=="5_rev"] <- "5"
-DATA$"26"[DATA$"26"=="4_rev"] <- "4"
-DATA$"26" <- as.numeric(DATA$"26")
+DATA$"CO8"[DATA$"CO8"=="1"] <- "5_rev"
+DATA$"CO8"[DATA$"CO8"=="2"] <- "4_rev"
+DATA$"CO8"[DATA$"CO8"=="4"] <- "2"
+DATA$"CO8"[DATA$"CO8"=="5"] <- "1"
+DATA$"CO8"[DATA$"CO8"=="6"] <- "NA"
+DATA$"CO8"[DATA$"CO8"=="7"] <- "NA"
+DATA$"CO8"[DATA$"CO8"=="5_rev"] <- "5"
+DATA$"CO8"[DATA$"CO8"=="4_rev"] <- "4"
+DATA$"CO8" <- as.numeric(DATA$"CO8")
 
-DATA$"15"[DATA$"15"=="1"] <- "5_rev"
-DATA$"15"[DATA$"15"=="2"] <- "4_rev"
-DATA$"15"[DATA$"15"=="4"] <- "2"
-DATA$"15"[DATA$"15"=="5"] <- "1"
-DATA$"15"[DATA$"15"=="6"] <- "NA"
-DATA$"15"[DATA$"15"=="7"] <- "NA"
-DATA$"15"[DATA$"15"=="5_rev"] <- "5"
-DATA$"15"[DATA$"15"=="4_rev"] <- "4"
-DATA$"15" <- as.numeric(DATA$"15")
+DATA$"DA7"[DATA$"DA7"=="1"] <- "5_rev"
+DATA$"DA7"[DATA$"DA7"=="2"] <- "4_rev"
+DATA$"DA7"[DATA$"DA7"=="4"] <- "2"
+DATA$"DA7"[DATA$"DA7"=="5"] <- "1"
+DATA$"DA7"[DATA$"DA7"=="6"] <- "NA"
+DATA$"DA7"[DATA$"DA7"=="7"] <- "NA"
+DATA$"DA7"[DATA$"DA7"=="5_rev"] <- "5"
+DATA$"DA7"[DATA$"DA7"=="4_rev"] <- "4"
+DATA$"DA7" <- as.numeric(DATA$"DA7")
 
-DATA$"22"[DATA$"22"=="1"] <- "5_rev"
-DATA$"22"[DATA$"22"=="2"] <- "4_rev"
-DATA$"22"[DATA$"22"=="4"] <- "2"
-DATA$"22"[DATA$"22"=="5"] <- "1"
-DATA$"22"[DATA$"22"=="6"] <- "NA"
-DATA$"22"[DATA$"22"=="7"] <- "NA"
-DATA$"22"[DATA$"22"=="5_rev"] <- "5"
-DATA$"22"[DATA$"22"=="4_rev"] <- "4"
-DATA$"22" <- as.numeric(DATA$"22")
+DATA$"CO5"[DATA$"CO5"=="1"] <- "5_rev"
+DATA$"CO5"[DATA$"CO5"=="2"] <- "4_rev"
+DATA$"CO5"[DATA$"CO5"=="4"] <- "2"
+DATA$"CO5"[DATA$"CO5"=="5"] <- "1"
+DATA$"CO5"[DATA$"CO5"=="6"] <- "NA"
+DATA$"CO5"[DATA$"CO5"=="7"] <- "NA"
+DATA$"CO5"[DATA$"CO5"=="5_rev"] <- "5"
+DATA$"CO5"[DATA$"CO5"=="4_rev"] <- "4"
+DATA$"CO5" <- as.numeric(DATA$"CO5")
 
-DATA$"14"[DATA$"14"=="1"] <- "5_rev"
-DATA$"14"[DATA$"14"=="2"] <- "4_rev"
-DATA$"14"[DATA$"14"=="4"] <- "2"
-DATA$"14"[DATA$"14"=="5"] <- "1"
-DATA$"14"[DATA$"14"=="6"] <- "NA"
-DATA$"14"[DATA$"14"=="7"] <- "NA"
-DATA$"14"[DATA$"14"=="5_rev"] <- "5"
-DATA$"14"[DATA$"14"=="4_rev"] <- "4"
-DATA$"14" <- as.numeric(DATA$"14")
-
-DATA$"20"[DATA$"20"=="1"] <- "5_rev"
-DATA$"20"[DATA$"20"=="2"] <- "4_rev"
-DATA$"20"[DATA$"20"=="4"] <- "2"
-DATA$"20"[DATA$"20"=="5"] <- "1"
-DATA$"20"[DATA$"20"=="6"] <- "NA"
-DATA$"20"[DATA$"20"=="7"] <- "NA"
-DATA$"20"[DATA$"20"=="5_rev"] <- "5"
-DATA$"20"[DATA$"20"=="4_rev"] <- "4"
-DATA$"20" <- as.numeric(DATA$"20")
-
-DATA$"24"[DATA$"24"=="1"] <- "5_rev"
-DATA$"24"[DATA$"24"=="2"] <- "4_rev"
-DATA$"24"[DATA$"24"=="4"] <- "2"
-DATA$"24"[DATA$"24"=="5"] <- "1"
-DATA$"24"[DATA$"24"=="6"] <- "NA"
-DATA$"24"[DATA$"24"=="7"] <- "NA"
-DATA$"24"[DATA$"24"=="5_rev"] <- "5"
-DATA$"24"[DATA$"24"=="4_rev"] <- "4"
-DATA$"24" <- as.numeric(DATA$"24")
-
-DATA$"5"[DATA$"5"=="1"] <- "5_rev"
-DATA$"5"[DATA$"5"=="2"] <- "4_rev"
-DATA$"5"[DATA$"5"=="4"] <- "2"
-DATA$"5"[DATA$"5"=="5"] <- "1"
-DATA$"5"[DATA$"5"=="6"] <- "NA"
-DATA$"5"[DATA$"5"=="7"] <- "NA"
-DATA$"5"[DATA$"5"=="5_rev"] <- "5"
-DATA$"5"[DATA$"5"=="4_rev"] <- "4"
-DATA$"5" <- as.numeric(DATA$"5")
+DATA$"CO9"[DATA$"CO9"=="1"] <- "5_rev"
+DATA$"CO9"[DATA$"CO9"=="2"] <- "4_rev"
+DATA$"CO9"[DATA$"CO9"=="4"] <- "2"
+DATA$"CO9"[DATA$"CO9"=="5"] <- "1"
+DATA$"CO9"[DATA$"CO9"=="6"] <- "NA"
+DATA$"CO9"[DATA$"CO9"=="7"] <- "NA"
+DATA$"CO9"[DATA$"CO9"=="5_rev"] <- "5"
+DATA$"CO9"[DATA$"CO9"=="4_rev"] <- "4"
+DATA$"CO9" <- as.numeric(DATA$"CO9")
 
 # Begin factor analysis
-
-SCREE <- scree(DATA, pc=FALSE)
-SCREE
 
 PA <- fa.parallel(DATA, fa="fa")
 PA
@@ -132,15 +88,55 @@ DATA <- DATA[complete.cases(DATA),]
 
 COR_DATA <- cor(DATA)
 
+
+FA_DATA2 <- fa(COR_DATA, nfactors=1, rotate="oblimin")
+fa.sort(FA_DATA2)
+
+# Bowler suggested method
+FA_DATA2 <- fa(COR_DATA, nfactors=2, rotate="Promax", fm="pa")
+0
+# Extracts one factor of 7 items and one of 1 item
+
+
 FA_DATA2 <- fa(COR_DATA, nfactors=3, rotate="oblimin")
 fa.sort(FA_DATA2)
+#Extracts 3 factors: one of 4 and two of 2
+# Factor 1: 28, 17, 11, 23 - conscientiousness
+# Factor 3: 6, 4 - lateral thinking ability
+# Factor 2: 5, 26 (reverse scored?) - rule following VS external locus of control
+
+
+
+FA_DATA2 <- fa(COR_DATA, nfactors=4, rotate="oblimin")
+fa.sort(FA_DATA2)
+#Extracts 4 factors of 2 items
+# Factor 4: 28, 10 - team value (conscientiousness?)
+# Factor 1: 17, 18 - self efficacy
+# Factor 3: 6, 4 - lateral thinking ability
+# Factor 2: 5, 26 (reverse scored?) - rule following VS external locus of control
 
 FA_DATA2 <- fa(COR_DATA, nfactors=5, rotate="oblimin")
 fa.sort(FA_DATA2)
+# 4 of 2, 1 of 1
+# Factor 4: 28, 10 - conscientiousness
+# Factor 1: 17, 18 - self efficacy
+# Factor 3: 6, 4 = lateral thinking ability
+# Factor 2: 22, 21 - Dispositional autonomy
+# Factor 5: 2
+
+
+FA_DATA2 <- fa(COR_DATA, nfactors=6, rotate="oblmin")
+fa.sort(FA_DATA2)
+# Factor 3: 6,4,3 - Lateral thinking
+# Factor 4: 28
+# Factor 1: 17, 18 - self efficacy
+# Factor 2: 21. 22 - Dispositional autonomy
+# Factor 6: X
+# Factor 5: 2
 
 # Subset dataset for just the items I'm keeping
 
-KEEPERS <- DATA[,c(2,3,4,6,8,17,18,27,28)]
+KEEPERS <- DATA[,c("LC1","CO4","DA6","DA8","LC4","LC7","DA10")]
 
 View(KEEPERS)
 
