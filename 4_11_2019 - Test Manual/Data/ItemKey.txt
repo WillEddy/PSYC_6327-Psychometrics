@@ -1,0 +1,40 @@
+Appendix A: Listing of evaluated items
+Items designed to measure dispositional autonomy (coded DA#):
+All items measuring this construct use the rating scale “Reflect me?” (Vagias 2006).
+1 – Very untrue of me, 2 – Untrue of me, 3 – Neutral, 4 – True of me, 5 – Very true of me
+1.	When I think of memories of moments when I was alone, I feel mostly negative emotions. (reverse scored)
+2.	When I’m alone, I usually get all my work done.
+3.	I get more done working on a team rather than working alone. (reverse scored)
+4.	In a public place, I would get more work done with headphones on so that I’m not distracted.
+5.	I’d be more content working in my own office rather than having a desk in an open plan office.
+6.	When I finish a hard job, I feel great about myself.
+7.	I’d rather read a book than go to a party.
+8.	I know that I can solve any problem I put my mind to.
+9.	It’s easier to make the right decision when everyone discusses the options. (reverse scored)
+10.	I know what’s best for myself.
+
+Items designed to measure conscientiousness (coded CO#):
+All items measuring this construct use the rating scale “Reflect me?” (Vagias 2006).
+1 – Very untrue of me, 2 – Untrue of me, 3 – Neutral, 4 – True of me, 5 – Very true of me
+1.	I do dishes right away after I finish eating.
+2.	My taxes are always turned in early.
+3.	If the police ever pulled me over, I would know exactly where all the documents they want to see are.
+4.	Knowing a job is done right helps me sleep better.
+5.	It’s ok if one part of the job isn’t quite right, if the rest of the steps are finished. (reverse scored)
+6.	Even if there’s an old way to something, I can often find a better way the first time. (reverse scored)
+7.	I get better results asking for forgiveness after doing something rather than asking permission beforehand. (reverse scored)
+8.	Sometimes I don’t have time to get everything done I’m supposed to. (reverse scored)
+9.	Rules are rules, and if I don’t like them I’ll need to change them the right way.
+10.	Getting the job done for the good of the company makes me feel like I’m valuable.
+
+Items designed to measure locus of control (coded LC#):
+All items measuring this construct use the rating scale “Level of Agreement” (Vagias 2006).
+1 – Strongly Disagree, 2 – Disagree, 3 – Neutral, 4 – Agree, 5 – Strongly agree
+1.	If I work hard, I can reach any goal I set.
+2.	Trophies and titles at work are very valuable to me. (reverse scored)
+3.	If I don’t know the answer to a question, I can usually find it.
+4.	I feel great when I find a way to complete a task more quickly than I could before.
+5.	For me to feel like I won, someone else must also lose. (reverse scored)
+6.	Most bosses are in that role because they know the best way to do the job of the people they are managing. (reverse scored)
+7.	I give excellent advice.
+8.	I often laugh at my own jokes.
