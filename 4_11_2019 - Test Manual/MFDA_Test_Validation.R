@@ -10,62 +10,66 @@ DATA_ALL <- read_csv("Data/EDDY_TestManualData_numeric_abridged.csv",
 
 #Removing incomplete cases
 DATA_ALL <- na.exclude(DATA_ALL)
-
-# Descriptive analysis
-
-DEMOG <- (DATA_ALL[29:37])
-DEMOG <- na.exclude(DEMOG)
-
-summary(DEMOG)
-histogram(DEMOG$Sex)
+View(DATA)
 
 
-#Testing internal consistency
+#Testing internal consistency obnibus and divided by hypothesized constructs
 alpha(DATA_ALL[1:28])
 alpha(DATA_ALL[1:10])
 alpha(DATA_ALL[10:20])
 alpha(DATA_ALL[21:28])
 
 
-# Removing lower quality items to raise cronbach's alpha / omega
-DATA <- DATA_ALL[,c(2,4:6,8:14,16,17,20:24,27,28,29,34,35)]
-alpha (DATA[1:7])
-alpha (DATA[8:14])
-alpha (DATA[15:21])
-alpha (DATA[1:20])
+# Removing lower quality items to raise cronbach's alpha / omega, then checking internal consistency again
+DATA <- DATA_ALL[,c(2:6,8:17,19:27,28,29,34,35)]
+omega (DATA[1:25])
+alpha (DATA[1:25])
 
-PA <- fa.parallel((DATA[1:20]), fa="fa")
-PA
 
 # Hypothesized number of factors based on scree plot is 4.
 # VSS function documentation suggests applying "more than hypothesized," so using 4.
 
-VSS(DATA, n=3, rotate="oblmin")
 
+PA <- fa.parallel((DATA[1:25]), fa="fa")
+PA
+
+VSS(DATA[1:25], n=3, rotate="oblimin")
 
 # Creating correlation table for fa() function, and requesting matrices.
-#Removing incomplete cases
-DATA <- na.exclude(DATA)
 
-COR_DATA <- cor(DATA[1:20])
-
+COR_DATA <- cor(DATA[1:25])
 
 # Bowler suggested method
-FA_DATA2 <- fa(COR_DATA, nfactors=2, rotate="oblmin", fm="pa")
+FA_DATA2 <- fa(COR_DATA, nfactors=3, rotate="oblimin", fm="pa")
 FA_DATA2
-fa.sort(FA_DATA2)
+FA_SORT <- fa.sort(FA_DATA2)
+FA_SORT$
+write.table(FA_SORT$Structure, "clipboard", sep="\t", row.names=FALSE)
 # Extracts one factor of 7 items and one of 1 item
-# Subset dataset for just the items I'm keeping
 
 
-
-DATA <- DATA[,c("DA6","DA8","DA10","CO4","LC1","LC3","Age","Sex","Race")]
-DATA$Total <- rowSums(DATA[1:6])
-
-alpha(DATA[1:6])
+# Subset dataset for just the items I'm keeping and create total field
 
 
-View(DATA)
+FACTOR1 <- DATA[,c("DA8","DA10","CO4","CO10","Age","Sex","Race")]
+FACTOR1$TOTAL <- rowSums(FACTOR1[1:4])
+hist(FACTOR1$TOTAL)
+
+
+FACTOR2 <- DATA[,c("LC8","LC4","LC1","LC3","LC7","Age","Sex","Race")]
+FACTOR2$TOTAL <- rowSums(FACTOR1[1:5])
+
+FACTOR3 <- DATA[,c("LC5","CO7","CO9","Age","Sex","Race")]
+FACTOR3$TOTAL <- rowSums(FACTOR1[1:3])
+
+DATA$AGGREGATE <- FACTOR1$TOTAL + FACTOR2$TOTAL - FACTOR3$TOTAL
+DATA$Factor1 <- FACTOR1$TOTAL
+DATA$Factor2 <- FACTOR2$TOTAL
+DATA$Factor3 <- FACTOR3$TOTAL
+DATA_FINAL <- DATA[,c("Factor1","Factor2","Factor3","AGGREGATE","Age","Sex","Race")]
+
+# Exporting to visualize in Tableau
+write.csv(DATA_FINAL, "DATA_FINAL.csv")
 
 omega(DATA)
 
@@ -74,21 +78,38 @@ omega(DATA)
 alpha(KEEPERS)
 omega(KEEPERS)
 
-DATA_Male = subset(DATA, DATA$Sex=="1")
-DATA_Female = subset(DATA, DATA$Sex=="2")
-t.test(DATA_Female$Total,DATA_Male$Total)
+# Group differences on aggregate score
 
-DATA_White = subset(DATA, DATA$Race=="1")
-DATA_AfricanAmerican = subset(DATA, DATA$Race=="2")
-t.test(DATA_White$Total,DATA_AfricanAmerican$Total)
+DATA_Male = subset(DATA_FINAL, DATA_FINAL$Sex=="1")
+DATA_Female = subset(DATA_FINAL, DATA_FINAL$Sex=="2")
+t.test(DATA_Female$AGGREGATE,DATA_Male$AGGREGATE)
 
-DATA_18to24 = subset(DATA, DATA$Age=="2")
-DATA_25to34 = subset(DATA, DATA$Race=="3")
-t.test(DATA_18to24$Total,DATA_25to34$Total)
+DATA_White = subset(DATA_FINAL, DATA_FINAL$Race=="1")
+DATA_AfricanAmerican = subset(DATA_FINAL, DATA_FINAL$Race=="2")
+t.test(DATA_White$AGGREGATE,DATA_AfricanAmerican$AGGREGATE)
 
-View(DATA)
+#DATA_18to24 = subset(DATA_FINAL, DATA_FINAL$Age=="2")
+#DATA_25to34 = subset(DATA_FINAL, DATA_FINAL$Age=="3")
+#t.test(DATA_18to24$AGGREGATE,DATA_25to34$AGGREGATE)
+# n too small for age group comparison
 
-head(DATA$Race)
+# Group differences on Factor 1 score
+
+t.test(DATA_Female$Factor1,DATA_Male$Factor1)
+
+t.test(DATA_White$Factor1,DATA_AfricanAmerican$Factor1)
+
+# Group differences on Factor 2 score
+
+t.test(DATA_Female$Factor2,DATA_Male$Factor2)
+
+t.test(DATA_White$Factor2,DATA_AfricanAmerican$Factor2)
+
+# Group differences on Factor 3 score
+
+t.test(DATA_Female$Factor3,DATA_Male$Factor3)
+
+t.test(DATA_White$Factor3,DATA_AfricanAmerican$Factor3)
 
 
 # Identifying Reverse Scored Items - look for negative loadings
